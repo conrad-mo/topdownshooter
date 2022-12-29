@@ -12,19 +12,19 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = 0;
         movement.y = 0;
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             movement.x = -1;
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             movement.x = 1;
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             movement.y = 1;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             movement.y = -1;
         }

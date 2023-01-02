@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public float followspeed = 10f;
+    public float followspeed = 0.1f;
     public GameObject player;
     public Rigidbody2D rb;
     Vector2 movement;
@@ -20,7 +20,9 @@ public class EnemyScript : MonoBehaviour
     }
     void FixedUpdate()
     {
+        rb.velocity = Vector2.up * followspeed;
         Vector2 lookDir = playerPos - rb.position;
-        rb.velocity = movement * followspeed;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = angle;
     }
 }

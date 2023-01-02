@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private float followspeed = 2f;
+    private float followspeed = 3f;
     public GameObject player;
     public GameObject enemy;
     public Rigidbody2D rb;

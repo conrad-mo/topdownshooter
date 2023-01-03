@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742599abb7912ec468a2be95fcf8a1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followspeed: 10
   player: {fileID: 669891031}
+  enemy: {fileID: 743380863}
   rb: {fileID: 743380864}
 --- !u!4 &743380867
 Transform:

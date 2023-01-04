@@ -7,11 +7,11 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
     public LogicScript logic;
 
-    private void Start()
+    void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
-    private void Update()
+    void Update()
     {
         if (rb.position.x < -10 || rb.position.x > 10 || rb.position.y > 6 || rb.position.y < -6)
         {
@@ -20,7 +20,10 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        logic.addScore();
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Enemy")
+        {
+            logic.addScore();
+            Destroy(gameObject);
+        }
     }
 }

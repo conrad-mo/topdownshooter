@@ -11,9 +11,11 @@ public class EnemySpawnScript : MonoBehaviour
     //private float playerdistance = 1;
     private Vector3 spawnCord;
     Vector3 playerPos;
+    public PlayerMovement playerscript;
     // Start is called before the first frame update
     void Start()
     {
+        playerscript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         spawnEnemy();
     }
 
@@ -25,7 +27,7 @@ public class EnemySpawnScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        else
+        else if (playerscript.life)
         {
             spawnEnemy();
             timer = 0;

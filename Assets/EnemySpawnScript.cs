@@ -16,7 +16,7 @@ public class EnemySpawnScript : MonoBehaviour
     void Start()
     {
         playerscript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        spawnEnemy();
+        SpawnEnemy();
     }
 
     // Update is called once per frame
@@ -29,11 +29,11 @@ public class EnemySpawnScript : MonoBehaviour
         }
         else if (playerscript.life)
         {
-            spawnEnemy();
+            SpawnEnemy();
             timer = 0;
         }
     }
-    void spawnEnemy()
+    void SpawnEnemy()
     {
         spawnCord = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4));
         Debug.Log(playerPos);

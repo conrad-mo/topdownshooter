@@ -8,7 +8,6 @@ public class EnemySpawnScript : MonoBehaviour
     public GameObject player;
     public float spawnRate = 1;
     private float timer = 0;
-    //private float playerdistance = 1;
     private Vector3 spawnCord;
     Vector3 playerPos;
     public PlayerMovement playerscript;
@@ -36,16 +35,10 @@ public class EnemySpawnScript : MonoBehaviour
     void SpawnEnemy()
     {
         spawnCord = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4));
-        Debug.Log(playerPos);
         while (Vector3.Distance(spawnCord, playerPos) < 3)
         {
-            Debug.Log("Need new cords");
-            Debug.Log(Vector3.Distance(spawnCord, playerPos));
-            Debug.Log("Sent new cords already");
             spawnCord = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4));
         }
-        Debug.Log("This one ok");
-        Debug.Log(Vector3.Distance(spawnCord, playerPos));
         Instantiate(enemy, spawnCord, transform.rotation);
     }
 }

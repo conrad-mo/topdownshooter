@@ -6,29 +6,16 @@ public class EnemyScript : MonoBehaviour
 {
     private float followspeed = 3f;
     public GameObject player;
-    public GameObject enemy;
     public Rigidbody2D rb;
-    private float timer = 0;
-    public float spawnRate = 2;
     Vector2 movement;
     Vector2 playerPos;
     // Update is called once per frame
     void Start()
     {
-        spawnEnemy();
-       // Instantiate(enemy, new Vector3(2, 2), transform.rotation);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     void Update()
     {
-        if (timer < spawnRate)
-        {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            spawnEnemy();
-            timer = 0;
-        }
         playerPos = player.transform.position;
     }
     void FixedUpdate()
@@ -41,9 +28,5 @@ public class EnemyScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
-    }
-    void spawnEnemy()
-    {
-        Instantiate(enemy, new Vector3(Random.Range(-8, 8), Random.Range(-4, 4)), transform.rotation);
     }
 }

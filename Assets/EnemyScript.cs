@@ -5,37 +5,34 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private float followspeed = 3f;
+    private const float FollowSpeed = 3f;
     public GameObject player;
-    public Rigidbody2D rb;
-    Vector2 movement;
-    Vector2 playerPos;
-    public PlayerMovement playerscript;
+    private Rigidbody2D _rigidbody2D;
+    private Vector2 _movement;
+    private Vector2 PlayerPos => player.transform.position;
+
+    private LogicScript _logic;
+
     // Update is called once per frame
     void Start()
     {
-        playerscript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-    }
-    void Update()
-    {
-        playerPos = player.transform.position;
+        _logic = FindObjectOfType<LogicScript>();
     }
     void FixedUpdate()
     {
-        if (playerscript.life)
+        if (!_logic.GameIsOver)
         {
-            rb.velocity = transform.up * followspeed;
-            Vector2 lookDir = playerPos - rb.position;
+            _rigidbody2D.velocity = transform.up * FollowSpeed;
+            Vector2 lookDir = PlayerPos - _rigidbody2D.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            _rigidbody2D.rotation = angle;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Damage()
     {
-        if (!collision.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject);
-        }
+        _logic.AddScore();
+        Destroy(gameObject);
     }
 }

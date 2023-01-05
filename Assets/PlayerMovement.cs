@@ -8,45 +8,41 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 100f;
     public Rigidbody2D rb;
     public Camera cam;
-    Vector2 movement;
-    Vector2 mousePos;
-    public LogicScript logic;
-    public bool life = true;
+    private Vector2 _movement;
+    private Vector2 _mousePos;
+
+    private LogicScript Logic => LogicScript.instance;
     // Update is called once per frame
-    void Start()
-    {
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-    }
     void Update()
     {
-        movement.x = 0;
-        movement.y = 0;
-        if (life)
+        _movement.x = 0;
+        _movement.y = 0;
+        if (!LogicScript.instance.GameIsOver)
         {
-            if (Input.GetKey(KeyCode.A) && rb.position.x > -9)
+            if (Input.GetKey(KeyCode.A))
             {
-                movement.x = -1;
+                _movement.x = -1;
             }
-            if (Input.GetKey(KeyCode.D) && rb.position.x < 9)
+            if (Input.GetKey(KeyCode.D))
             {
-                movement.x = 1;
+                _movement.x = 1;
             }
-            if (Input.GetKey(KeyCode.W) && rb.position.y < 5)
+            if (Input.GetKey(KeyCode.W))
             {
-                movement.y = 1;
+                _movement.y = 1;
             }
-            if (Input.GetKey(KeyCode.S) && rb.position.y > -5)
+            if (Input.GetKey(KeyCode.S))
             {
-                movement.y = -1;
+                _movement.y = -1;
             }
         }
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void FixedUpdate()
     {
-        rb.velocity = movement * moveSpeed;
-        Vector2 lookDir = mousePos - rb.position;
+        rb.velocity = _movement * moveSpeed;
+        Vector2 lookDir = _mousePos - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
 
@@ -56,8 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            logic.GameOver();
-            life = false;
+            Logic.GameOver();
         }
     }
 }

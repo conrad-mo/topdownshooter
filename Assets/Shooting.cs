@@ -6,7 +6,10 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public float bulletForce = 20f;
+    
+    [SerializeField]
+    private float bulletForce = 20f;
+    
     public PlayerMovement player;
     // Update is called once per frame
     void Start()
@@ -15,7 +18,7 @@ public class Shooting : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && player.life)
+        if (Input.GetButtonDown("Fire1") && !LogicScript.instance.GameIsOver)
         {
             Shoot();
         }

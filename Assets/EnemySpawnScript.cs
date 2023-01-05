@@ -26,7 +26,7 @@ public class EnemySpawnScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        else if (playerscript.life)
+        else if (!LogicScript.instance.GameIsOver)
         {
             SpawnEnemy();
             timer = 0;
